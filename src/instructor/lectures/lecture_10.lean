@@ -181,17 +181,10 @@ theorem no_contradiction : ∀ (P : Prop), ¬(P ∧ ¬P) :=
 begin
   assume P,
   assume h,
-<<<<<<< HEAD
-  have p:= h.left,
-  have np := h.right,
-  have f := np p,
-  apply f,
-=======
   have p := h.left,
   have np := h.right,
   have f := np p,
   exact f,
->>>>>>> 36448287f7f33dcb7d4182fcc8163977e44bf41a
 end
 
 
