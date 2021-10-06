@@ -137,9 +137,8 @@ example : ∀ (P Q : Prop), Q ∧ P → P :=
 begin
   assume P Q,
   assume qandp,
-  apply and.elim_right qandp,
+  apply and.elim_right qandp, 
 end
-
 
 
 -- -------------------------------------
@@ -404,10 +403,10 @@ the terms means.)
 -/
 
 def eq_is_symmetric : Prop :=
-  ∀ (T : Type) (x y : T), _
+  ∀ (T : Type) (x y : T), x = y → y = x
 
 def eq_is_transitive : Prop :=
-  _
+  ∀ (T : Type) ( x y z : T), x = y → y = z → x = z
 
 
 /-
@@ -426,7 +425,29 @@ both directions.
 -/
 
 def negelim_equiv_exmid : Prop := 
-  _
+  ∀ (P : Prop), ¬¬P ↔ P ∨ ¬P
+  
+  example : negelim_equiv_exmid :=
+  begin
+    unfold negelim_equiv_exmid,
+    assume P,
+    apply iff.intro _ _,
+    assume nnp,
+    apply or.intro_left,
+    have pornp := classical.em P,
+    cases pornp with p pn,
+    assumption,
+    contradiction,
+    assume pornp,
+    apply or.elim pornp,
+    assume p,
+    contradiction,
+    assume np,
+    assume np,
+    apply np,
+    
+  end  
+
 
 
 /- 
@@ -438,4 +459,12 @@ thre is someone who loves everyone. [5 points]
 
 axiom Loves : Person → Person → Prop
 
-example : _ := _
+example :  (∃ (p1 : Person), ∀ ( p2 : Person), Loves p2 p1) → (∀ ( p3 : Person), ∃ (p4 : Person), Loves p3 p4) := 
+begin
+  assume h,
+  cases h with p pf,
+  assume p3,
+  apply exists.intro p,
+  apply pf p3,
+end
+
