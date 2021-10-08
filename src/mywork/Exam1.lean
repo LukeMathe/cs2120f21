@@ -75,7 +75,8 @@ inference rule notation.
 Give a brief English language explanation of
 the introduction rule for true.
 
--- answer here
+-- The introduction rule for true is to assume 
+a proposition is true. 
 
 ELIMINATION
 
@@ -90,7 +91,7 @@ there's no use for an elimination rule.
 
 -- Give a formal proof of the following:
 
-example : true := 
+example : true := assume true,
 
 
 -- -------------------------------------
@@ -133,7 +134,7 @@ Formally state and prove the theorem that,
 for any propositions P and Q,  Q ∧ P → P. 
 -/
 
-example : ∀ (P Q : Prop), Q ∧ P → P := 
+example : ∀ (P Q : Prop), (Q ∧ P) → P := 
 begin
   assume P Q,
   assume qandp,
